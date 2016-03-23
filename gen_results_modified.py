@@ -1,7 +1,7 @@
 import sys
 import os
 import re
-import pylab as pl
+#import pylab as pl
 import numpy as np
 import argparse
 import copy
@@ -18,7 +18,7 @@ parser.add_argument('-l', '--length', action='store_true')
 args = parser.parse_args()
 
 # Initializations and creating utility functions
-testLen = 100000
+testLen = 10000
 
 
 def fnames(flist):

@@ -8,75 +8,99 @@ import sys
 
 # Timing fuctions
 
-def time_algo(sort_fun, input_seq, num=10):
+def time_algo_min(sort_fun, input_seq, num=10):
     '''
     Time how long it takes to sort sequence 'input_seq' using
     function 'sort_fun'. Take min of 'num' times.
     '''
-    def wrapper(func, *args):
-        def wrapped():
-            return func(*args)
-        return wrapped
+    def wrapped():
+        sort_fun(foo)
 
     def reset_seq():
         foo[:] = input_seq[:]
 
     foo = []
-    wrapped = wrapper(sort_fun, foo)
     return min(timeit.timeit(wrapped, setup=reset_seq,
-               number=1) for _ in range(num))
+                             number=1) for _ in range(num))
 
 
-def time_algo_min_mean(sort_fun, input_seq, num=10):
+def time_algo_mean(sort_fun, input_seq, num=10):
     '''
     Time how long it takes to sort sequence 'input_seq' using
     function 'sort_fun'.
     Repeat 'num' times and return tuple (min, mean).
     '''
-    def wrapper(func, *args):
-        def wrapped():
-            return func(*args)
-        return wrapped
+    def wrapped():
+        sort_fun(foo)
 
     def reset_seq():
         foo[:] = input_seq[:]
 
     foo = []
-    wrapped = wrapper(sort_fun, foo)
     result = list(timeit.timeit(wrapped, setup=reset_seq,
-                  number=1) for _ in range(num))
-    return (min(result), (sum(result) / len(result)))
+                                number=1) for _ in range(num))
+    return sum(result) / len(result)
+
+
+def time_algo_included_min(sort_fun, input_seq, num=10):
+    '''
+    Time how long it takes to sort sequence 'input_seq' using
+    function 'sort_fun'.
+    Copying of 'input_seq' timing included.
+    Return min of 'num' runs.
+    '''
+    def wrapped():
+        sort_fun(input_seq[:])
+
+    return min(timeit.repeat(wrapped, repeat=num, number=1))
+
+
+def time_algo_included_mean(sort_fun, input_seq, num=10):
+    '''
+    Time how long it takes to sort sequence 'input_seq' using
+    function 'sort_fun'.
+    Copying of 'input_seq' timing included.
+    Return mean of 'num' runs.
+    '''
+    def wrapped():
+        sort_fun(input_seq[:])
+
+    return timeit.timeit(wrapped, number=num) / num
 
 
 # Test sequences generators
 # Based on: http://warp.povusers.org/SortComparison/
 
-def AlmostUp(n,percentRand=10):
-    result=range(n)
-    numRand=int((percentRand/100.0)*n)
-    choices=iter(np.random.choice(range(n),numRand,replace=False))
-    for count in range(int(numRand/2)):
-        i1=choices.next()
-        i2=choices.next()
-        tmp=result[i1]
-        result[i1]=result[i2]
-        result[i2]=tmp
+def AlmostUp(n, percentRand=10):
+    result = range(n)
+    numRand = int((percentRand / 100.0) * n)
+    choices = iter(np.random.choice(range(n), numRand, replace=False))
+    for count in range(int(numRand / 2)):
+        i1 = choices.next()
+        i2 = choices.next()
+        tmp = result[i1]
+        result[i1] = result[i2]
+        result[i2] = tmp
     return result
 
-def AlmostDown(n,percentRand=10):
-    result=AlmostUp(n,percentRand)
+
+def AlmostDown(n, percentRand=10):
+    result = AlmostUp(n, percentRand)
     result.reverse()
     return result
+
 
 def CompleteRandom(n):
     return np.random.permutation(range(n)).tolist()
 
-def RandomEnd(n,nRandom=256):
-    result=np.array(range(n-nRandom))*2; # n sorted even numbers
-    randInts=np.random.choice(result+1,nRandom,replace=False)
-    return list(np.concatenate((result,randInts)))
 
-seqGenerators=[CompleteRandom,AlmostUp,AlmostDown,RandomEnd]
+def RandomEnd(n, nRandom=256):
+    result = np.array(range(n - nRandom)) * 2
+    # n sorted even numbers
+    randInts = np.random.choice(result + 1, nRandom, replace=False)
+    return list(np.concatenate((result, randInts)))
+
+seqGenerators = [CompleteRandom, AlmostUp, AlmostDown, RandomEnd]
 
 '''
 ###################################################################################################

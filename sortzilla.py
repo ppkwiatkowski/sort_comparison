@@ -1,21 +1,16 @@
 import numpy as np
 import pylab as pl
-import timeit,pdb,itertools,copy,pickle,sys,os
+import timeit, itertools, copy, pickle, sys
 
-#pypyPath="/Users/pk/Downloads/pypy-4.0.1-src/"
-#sys.path.append(os.path.normpath(pypyPath))
-#sys.path.append(os.path.normpath(pypyPath+"/rpython/rlib"))
 
-#from listsort import TimSort as TS
 
 ###############################################################
 # Utility Functions
 # (eg for feature extraction from sequences, timing, etc
 
-def ExtractPairwiseFeatures(inSeq,numSamples=10):
-
-    samples=[inSeq[int(tmp)] for tmp in pl.linspace(0,len(inSeq)-1,numSamples)]
-    foo=[[cmp(samples[tmp1],samples[tmp2]) for tmp2 in range(tmp1+1,numSamples)]
+def ExtractPairwiseFeatures(inSeq, numSamples=10):
+    samples = [inSeq[int(tmp)] for tmp in pl.linspace(0,len(inSeq)-1,numSamples)]
+    foo = [[cmp(samples[tmp1],samples[tmp2]) for tmp2 in range(tmp1+1,numSamples)]
          for tmp1 in range(numSamples)]
     return np.array(list(itertools.chain(*foo)))
 
