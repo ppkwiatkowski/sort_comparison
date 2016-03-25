@@ -1,4 +1,5 @@
 import sys
+import matplotlib.pyplot as plt
 sys.path.insert(0, '..')
 from sort_comp_lib import (time_algo_min, time_algo_mean,
                            time_algo_included_min, time_algo_included_mean,
@@ -26,4 +27,25 @@ def _quicksort(l, start, stop):
         _quicksort(l, left, stop)
 
 
-print time_algo_min(fsort, gen_seq_complete_random(1000000))
+seq_lengths = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 1000000]
+
+
+def wrapper(f, l):
+    print (f.__name__ + ' %d') % l
+    return f(quicksort, gen_seq_complete_random(l))
+
+d_time_algo_min = [wrapper(time_algo_min, l) for l in seq_lengths]
+d_time_algo_mean = [wrapper(time_algo_mean, l) for l in seq_lengths]
+d_time_algo_included_min = [wrapper(time_algo_included_min, l)
+                            for l in seq_lengths]
+d_time_algo_included_mean = [wrapper(time_algo_included_mean, l)
+                             for l in seq_lengths]
+
+plt.plot(seq_lengths, d_time_algo_min, '--', label='min')
+plt.plot(seq_lengths, d_time_algo_mean, '--', label='mean')
+plt.plot(seq_lengths, d_time_algo_included_min, '--', label='included_min')
+plt.plot(seq_lengths, d_time_algo_included_mean, '--', label='included_mean')
+plt.xlabel('sequence length')
+plt.ylabel('time (s)')
+plt.legend(bbox_to_anchor=(0, 1), loc=2, borderaxespad=0., frameon=False)
+plt.show()
