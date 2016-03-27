@@ -27,7 +27,7 @@ def _quicksort(l, start, stop):
         _quicksort(l, left, stop)
 
 
-seq_lengths = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 1000000]
+seq_lengths = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]
 
 
 def wrapper(f, l):
@@ -41,11 +41,24 @@ d_time_algo_included_min = [wrapper(time_algo_included_min, l)
 d_time_algo_included_mean = [wrapper(time_algo_included_mean, l)
                              for l in seq_lengths]
 
-plt.plot(seq_lengths, d_time_algo_min, '--', label='min')
-plt.plot(seq_lengths, d_time_algo_mean, '--', label='mean')
-plt.plot(seq_lengths, d_time_algo_included_min, '--', label='included_min')
-plt.plot(seq_lengths, d_time_algo_included_mean, '--', label='included_mean')
+plt.plot(seq_lengths, d_time_algo_min,
+         '--', marker='x', label='min')
+plt.plot(seq_lengths, d_time_algo_mean,
+         '--', marker='x', label='mean')
+plt.plot(seq_lengths, d_time_algo_included_min,
+         '--', marker='x', label='included_min')
+plt.plot(seq_lengths, d_time_algo_included_mean,
+         '--', marker='x',  label='included_mean')
+plt.xscale('log')
+plt.yscale('log')
+plt.grid(True)
 plt.xlabel('sequence length')
 plt.ylabel('time (s)')
 plt.legend(bbox_to_anchor=(0, 1), loc=2, borderaxespad=0., frameon=False)
 plt.show()
+
+#x = range(len(seq_lengths))
+#plt.yaxis('log')
+#plt.bar(x, d_time_algo_min)
+
+#plt.show()
