@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Cython: quicksort_cython_opt2.pyx</title>
+    <title>Cython: quicksort_cython_opt3.pyx</title>
     <style type="text/css">
     
 body.cython { font-family: courier; font-size: 12; }
@@ -301,48 +301,44 @@ body.cython { font-family: courier; font-size: 12; }
     <span style="background-color: #FFFF00">Yellow lines</span> hint at Python interaction.<br />
     Click on a line that starts with a "<code>+</code>" to see the C code that Cython generated for it.
 </p>
-<p>Raw output: <a href="quicksort_cython_opt2.c">quicksort_cython_opt2.c</a></p>
-<div class="cython"><pre class="cython line score-11" onclick='toggleDiv(this)'>+<span class="">01</span>: from cpython cimport array</pre>
+<p>Raw output: <a href="quicksort_cython_opt3.c">quicksort_cython_opt3.c</a></p>
+<div class="cython"><pre class="cython line score-11" onclick='toggleDiv(this)'>+<span class="">01</span>: # In-place quicksort</pre>
 <pre class='cython code score-11 '>  __pyx_t_1 = <span class='py_c_api'>PyDict_New</span>();<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_test, __pyx_t_1) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-</pre><pre class="cython line score-8" onclick='toggleDiv(this)'>+<span class="">02</span>: import array</pre>
-<pre class='cython code score-8 '>  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_Import</span>(__pyx_n_s_array, 0, -1);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_array, __pyx_t_1) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">03</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">04</span>: # In-place quicksort</pre>
-<pre class="cython line score-21" onclick='toggleDiv(this)'>+<span class="">05</span>: def quicksort_cython_opt2(list l):</pre>
-<pre class='cython code score-21 '>/* Python wrapper */
-static PyObject *__pyx_pw_21quicksort_cython_opt2_1quicksort_cython_opt2(PyObject *__pyx_self, PyObject *__pyx_v_l); /*proto*/
-static PyMethodDef __pyx_mdef_21quicksort_cython_opt2_1quicksort_cython_opt2 = {"quicksort_cython_opt2", (PyCFunction)__pyx_pw_21quicksort_cython_opt2_1quicksort_cython_opt2, METH_O, 0};
-static PyObject *__pyx_pw_21quicksort_cython_opt2_1quicksort_cython_opt2(PyObject *__pyx_self, PyObject *__pyx_v_l) {
+</pre><pre class="cython line score-22" onclick='toggleDiv(this)'>+<span class="">02</span>: def quicksort_cython_opt3(int[:] l):</pre>
+<pre class='cython code score-22 '>/* Python wrapper */
+static PyObject *__pyx_pw_21quicksort_cython_opt3_1quicksort_cython_opt3(PyObject *__pyx_self, PyObject *__pyx_arg_l); /*proto*/
+static PyMethodDef __pyx_mdef_21quicksort_cython_opt3_1quicksort_cython_opt3 = {"quicksort_cython_opt3", (PyCFunction)__pyx_pw_21quicksort_cython_opt3_1quicksort_cython_opt3, METH_O, 0};
+static PyObject *__pyx_pw_21quicksort_cython_opt3_1quicksort_cython_opt3(PyObject *__pyx_self, PyObject *__pyx_arg_l) {
+  __Pyx_memviewslice __pyx_v_l = { 0, 0, { 0 }, { 0 }, { 0 } };
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("quicksort_cython_opt2 (wrapper)", 0);
-  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_l), (&amp;PyList_Type), 1, "l", 1))) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  __pyx_r = __pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(__pyx_self, ((PyObject*)__pyx_v_l));
-  CYTHON_UNUSED int __pyx_lineno = 0;
-  CYTHON_UNUSED const char *__pyx_filename = NULL;
-  CYTHON_UNUSED int __pyx_clineno = 0;
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("quicksort_cython_opt3 (wrapper)", 0);
+  assert(__pyx_arg_l); {
+    __pyx_v_l = <span class='pyx_c_api'>__Pyx_PyObject_to_MemoryviewSlice_ds_int</span>(__pyx_arg_l);<span class='error_goto'> if (unlikely(!__pyx_v_l.memview)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L3_error;}</span>
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("quicksort_cython_opt3.quicksort_cython_opt3", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_21quicksort_cython_opt3_quicksort_cython_opt3(__pyx_self, __pyx_v_l);
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
 
   /* function exit code */
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __pyx_r = NULL;
-  __pyx_L0:;
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_l) {
-  arrayobject *__pyx_v_a = 0;
-  CYTHON_UNUSED __Pyx_memviewslice __pyx_v_ca = { 0, 0, { 0 }, { 0 }, { 0 } };
+static PyObject *__pyx_pf_21quicksort_cython_opt3_quicksort_cython_opt3(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_l) {
   PyObject *__pyx_r = NULL;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("quicksort_cython_opt2", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("quicksort_cython_opt3", 0);
 /* … */
   /* function exit code */
   __pyx_r = Py_None; <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
@@ -350,56 +346,40 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2);
-  __PYX_XDEC_MEMVIEW(&amp;__pyx_t_3, 1);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("quicksort_cython_opt2.quicksort_cython_opt2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("quicksort_cython_opt3.quicksort_cython_opt3", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  <span class='pyx_macro_api'>__Pyx_XDECREF</span>((PyObject *)__pyx_v_a);
-  __PYX_XDEC_MEMVIEW(&amp;__pyx_v_ca, 1);
+  __PYX_XDEC_MEMVIEW(&amp;__pyx_v_l, 1);
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 /* … */
-  __pyx_tuple__14 = <span class='py_c_api'>PyTuple_Pack</span>(3, __pyx_n_s_l, __pyx_n_s_a, __pyx_n_s_ca);<span class='error_goto'> if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_tuple__14 = <span class='py_c_api'>PyTuple_Pack</span>(2, __pyx_n_s_l, __pyx_n_s_l);<span class='error_goto'> if (unlikely(!__pyx_tuple__14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__14);
   <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__14);
 /* … */
-  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_21quicksort_cython_opt2_1quicksort_cython_opt2, NULL, __pyx_n_s_quicksort_cython_opt2);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_21quicksort_cython_opt3_1quicksort_cython_opt3, NULL, __pyx_n_s_quicksort_cython_opt3);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_quicksort_cython_opt2, __pyx_t_1) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_quicksort_cython_opt3, __pyx_t_1) &lt; 0) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_codeobj__15 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_pk_venv_sort_comparison_l, __pyx_n_s_quicksort_cython_opt2, 5, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-</pre><pre class="cython line score-12" onclick='toggleDiv(this)'>+<span class="">06</span>:     cdef array.array a = array.array('i', l)</pre>
-<pre class='cython code score-12 '>  __pyx_t_1 = <span class='py_c_api'>PyTuple_New</span>(2);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_codeobj__15 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_pk_venv_sort_comparison_l, __pyx_n_s_quicksort_cython_opt3, 2, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+</pre><pre class="cython line score-9" onclick='toggleDiv(this)'>+<span class="">03</span>:     _quicksort(l, 0, l.size - 1)</pre>
+<pre class='cython code score-9 '>  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_l, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);;<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-  <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_n_s_i);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_n_s_i);
-  <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_1, 0, __pyx_n_s_i);
-  <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_v_l);
-  <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_v_l);
-  <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_1, 1, __pyx_v_l);
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(((PyObject *)__pyx_ptype_7cpython_5array_array), __pyx_t_1, NULL);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_t_1, __pyx_n_s_size);<span class='error_goto'> if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_a = ((arrayobject *)__pyx_t_2);
-  __pyx_t_2 = 0;
-</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">07</span>:     cdef int[:] ca = a</pre>
-<pre class='cython code score-2 '>  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyObject_to_MemoryviewSlice_ds_int</span>(((PyObject *)__pyx_v_a));
-  if (unlikely(!__pyx_t_3.memview)) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  __pyx_v_ca = __pyx_t_3;
-  __pyx_t_3.memview = NULL;
-  __pyx_t_3.data = NULL;
-</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">08</span>:     _quicksort(a, 0, len(a) - 1)</pre>
-<pre class='cython code score-2 '>  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyObject_to_MemoryviewSlice_ds_int</span>(((PyObject *)__pyx_v_a));
-  if (unlikely(!__pyx_t_3.memview)) <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  __pyx_t_4 = Py_SIZE(((PyObject *)__pyx_v_a));<span class='error_goto'> if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
-  __pyx_f_21quicksort_cython_opt2__quicksort(__pyx_t_3, 0, (__pyx_t_4 - 1));
-  __PYX_XDEC_MEMVIEW(&amp;__pyx_t_3, 1);
-</pre><pre class="cython line score-0">&#xA0;<span class="">09</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">10</span>: </pre>
-<pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">11</span>: cdef void _quicksort(int[:] l, int start, int stop):</pre>
-<pre class='cython code score-2 '>static void __pyx_f_21quicksort_cython_opt2__quicksort(__Pyx_memviewslice __pyx_v_l, int __pyx_v_start, int __pyx_v_stop) {
+  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyInt_SubtractObjC</span>(__pyx_t_2, __pyx_int_1, 1, 0);<span class='error_goto'> if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyInt_As_int</span>(__pyx_t_1);<span class='error_goto'> if (unlikely((__pyx_t_3 == (int)-1) &amp;&amp; PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+  <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_f_21quicksort_cython_opt3__quicksort(__pyx_v_l, 0, __pyx_t_3);
+</pre><pre class="cython line score-0">&#xA0;<span class="">04</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">05</span>: </pre>
+<pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">06</span>: cdef void _quicksort(int[:] l, int start, int stop):</pre>
+<pre class='cython code score-2 '>static void __pyx_f_21quicksort_cython_opt3__quicksort(__Pyx_memviewslice __pyx_v_l, int __pyx_v_start, int __pyx_v_stop) {
   int __pyx_v_pivot;
   int __pyx_v_left;
   int __pyx_v_right;
@@ -410,17 +390,17 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
   /* function exit code */
   goto __pyx_L0;
   __pyx_L1_error:;
-  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("quicksort_cython_opt2._quicksort", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
+  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("quicksort_cython_opt3._quicksort", __pyx_clineno, __pyx_lineno, __pyx_filename, 0, 0);
   __pyx_L0:;
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
 }
-</pre><pre class="cython line score-0">&#xA0;<span class="">12</span>:     cdef int pivot, left, right, tmp</pre>
-<pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">13</span>:     if stop - start &gt; 0:</pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">07</span>:     cdef int pivot, left, right, tmp</pre>
+<pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">08</span>:     if stop - start &gt; 0:</pre>
 <pre class='cython code score-0 '>  __pyx_t_1 = (((__pyx_v_stop - __pyx_v_start) &gt; 0) != 0);
   if (__pyx_t_1) {
 /* … */
   }
-</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">14</span>:         pivot = l[start]</pre>
+</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">09</span>:         pivot = l[start]</pre>
 <pre class='cython code score-2 '>    __pyx_t_2 = __pyx_v_start;
     __pyx_t_3 = -1;
     if (__pyx_t_2 &lt; 0) {
@@ -429,18 +409,18 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
     } else if (unlikely(__pyx_t_2 &gt;= __pyx_v_l.shape[0])) __pyx_t_3 = 0;
     if (unlikely(__pyx_t_3 != -1)) {
       <span class='pyx_c_api'>__Pyx_RaiseBufferIndexError</span>(__pyx_t_3);
-      <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+      <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
     }
     __pyx_v_pivot = (*((int *) ( /* dim=0 */ (__pyx_v_l.data + __pyx_t_2 * __pyx_v_l.strides[0]) )));
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">15</span>:         left = start</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">10</span>:         left = start</pre>
 <pre class='cython code score-0 '>    __pyx_v_left = __pyx_v_start;
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">16</span>:         right = stop</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">11</span>:         right = stop</pre>
 <pre class='cython code score-0 '>    __pyx_v_right = __pyx_v_stop;
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">17</span>:         while left &lt;= right:</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">12</span>:         while left &lt;= right:</pre>
 <pre class='cython code score-0 '>    while (1) {
       __pyx_t_1 = ((__pyx_v_left &lt;= __pyx_v_right) != 0);
       if (!__pyx_t_1) break;
-</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">18</span>:             while l[left] &lt; pivot:</pre>
+</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">13</span>:             while l[left] &lt; pivot:</pre>
 <pre class='cython code score-2 '>      while (1) {
         __pyx_t_4 = __pyx_v_left;
         __pyx_t_3 = -1;
@@ -450,14 +430,14 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
         } else if (unlikely(__pyx_t_4 &gt;= __pyx_v_l.shape[0])) __pyx_t_3 = 0;
         if (unlikely(__pyx_t_3 != -1)) {
           <span class='pyx_c_api'>__Pyx_RaiseBufferIndexError</span>(__pyx_t_3);
-          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
         }
         __pyx_t_1 = (((*((int *) ( /* dim=0 */ (__pyx_v_l.data + __pyx_t_4 * __pyx_v_l.strides[0]) ))) &lt; __pyx_v_pivot) != 0);
         if (!__pyx_t_1) break;
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">19</span>:                 left += 1</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">14</span>:                 left += 1</pre>
 <pre class='cython code score-0 '>        __pyx_v_left = (__pyx_v_left + 1);
       }
-</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">20</span>:             while l[right] &gt; pivot:</pre>
+</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">15</span>:             while l[right] &gt; pivot:</pre>
 <pre class='cython code score-2 '>      while (1) {
         __pyx_t_5 = __pyx_v_right;
         __pyx_t_3 = -1;
@@ -467,20 +447,20 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
         } else if (unlikely(__pyx_t_5 &gt;= __pyx_v_l.shape[0])) __pyx_t_3 = 0;
         if (unlikely(__pyx_t_3 != -1)) {
           <span class='pyx_c_api'>__Pyx_RaiseBufferIndexError</span>(__pyx_t_3);
-          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
         }
         __pyx_t_1 = (((*((int *) ( /* dim=0 */ (__pyx_v_l.data + __pyx_t_5 * __pyx_v_l.strides[0]) ))) &gt; __pyx_v_pivot) != 0);
         if (!__pyx_t_1) break;
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">21</span>:                 right -= 1</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">16</span>:                 right -= 1</pre>
 <pre class='cython code score-0 '>        __pyx_v_right = (__pyx_v_right - 1);
       }
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">22</span>:             if left &lt;= right:</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">17</span>:             if left &lt;= right:</pre>
 <pre class='cython code score-0 '>      __pyx_t_1 = ((__pyx_v_left &lt;= __pyx_v_right) != 0);
       if (__pyx_t_1) {
 /* … */
       }
     }
-</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">23</span>:                 tmp = l[left]</pre>
+</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">18</span>:                 tmp = l[left]</pre>
 <pre class='cython code score-2 '>        __pyx_t_6 = __pyx_v_left;
         __pyx_t_3 = -1;
         if (__pyx_t_6 &lt; 0) {
@@ -489,10 +469,10 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
         } else if (unlikely(__pyx_t_6 &gt;= __pyx_v_l.shape[0])) __pyx_t_3 = 0;
         if (unlikely(__pyx_t_3 != -1)) {
           <span class='pyx_c_api'>__Pyx_RaiseBufferIndexError</span>(__pyx_t_3);
-          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
         }
         __pyx_v_tmp = (*((int *) ( /* dim=0 */ (__pyx_v_l.data + __pyx_t_6 * __pyx_v_l.strides[0]) )));
-</pre><pre class="cython line score-4" onclick='toggleDiv(this)'>+<span class="">24</span>:                 l[left] = l[right]</pre>
+</pre><pre class="cython line score-4" onclick='toggleDiv(this)'>+<span class="">19</span>:                 l[left] = l[right]</pre>
 <pre class='cython code score-4 '>        __pyx_t_7 = __pyx_v_right;
         __pyx_t_3 = -1;
         if (__pyx_t_7 &lt; 0) {
@@ -501,7 +481,7 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
         } else if (unlikely(__pyx_t_7 &gt;= __pyx_v_l.shape[0])) __pyx_t_3 = 0;
         if (unlikely(__pyx_t_3 != -1)) {
           <span class='pyx_c_api'>__Pyx_RaiseBufferIndexError</span>(__pyx_t_3);
-          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
         }
         __pyx_t_8 = __pyx_v_left;
         __pyx_t_3 = -1;
@@ -511,10 +491,10 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
         } else if (unlikely(__pyx_t_8 &gt;= __pyx_v_l.shape[0])) __pyx_t_3 = 0;
         if (unlikely(__pyx_t_3 != -1)) {
           <span class='pyx_c_api'>__Pyx_RaiseBufferIndexError</span>(__pyx_t_3);
-          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
         }
         *((int *) ( /* dim=0 */ (__pyx_v_l.data + __pyx_t_8 * __pyx_v_l.strides[0]) )) = (*((int *) ( /* dim=0 */ (__pyx_v_l.data + __pyx_t_7 * __pyx_v_l.strides[0]) )));
-</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">25</span>:                 l[right] = tmp</pre>
+</pre><pre class="cython line score-2" onclick='toggleDiv(this)'>+<span class="">20</span>:                 l[right] = tmp</pre>
 <pre class='cython code score-2 '>        __pyx_t_9 = __pyx_v_right;
         __pyx_t_3 = -1;
         if (__pyx_t_9 &lt; 0) {
@@ -523,15 +503,15 @@ static PyObject *__pyx_pf_21quicksort_cython_opt2_quicksort_cython_opt2(CYTHON_U
         } else if (unlikely(__pyx_t_9 &gt;= __pyx_v_l.shape[0])) __pyx_t_3 = 0;
         if (unlikely(__pyx_t_3 != -1)) {
           <span class='pyx_c_api'>__Pyx_RaiseBufferIndexError</span>(__pyx_t_3);
-          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
+          <span class='error_goto'>{__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}</span>
         }
         *((int *) ( /* dim=0 */ (__pyx_v_l.data + __pyx_t_9 * __pyx_v_l.strides[0]) )) = __pyx_v_tmp;
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">26</span>:                 left += 1</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">21</span>:                 left += 1</pre>
 <pre class='cython code score-0 '>        __pyx_v_left = (__pyx_v_left + 1);
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">27</span>:                 right -= 1</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">22</span>:                 right -= 1</pre>
 <pre class='cython code score-0 '>        __pyx_v_right = (__pyx_v_right - 1);
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">28</span>:         _quicksort(l, start, right)</pre>
-<pre class='cython code score-0 '>    __pyx_f_21quicksort_cython_opt2__quicksort(__pyx_v_l, __pyx_v_start, __pyx_v_right);
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">29</span>:         _quicksort(l, left, stop)</pre>
-<pre class='cython code score-0 '>    __pyx_f_21quicksort_cython_opt2__quicksort(__pyx_v_l, __pyx_v_left, __pyx_v_stop);
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">23</span>:         _quicksort(l, start, right)</pre>
+<pre class='cython code score-0 '>    __pyx_f_21quicksort_cython_opt3__quicksort(__pyx_v_l, __pyx_v_start, __pyx_v_right);
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">24</span>:         _quicksort(l, left, stop)</pre>
+<pre class='cython code score-0 '>    __pyx_f_21quicksort_cython_opt3__quicksort(__pyx_v_l, __pyx_v_left, __pyx_v_stop);
 </pre></div></body></html>

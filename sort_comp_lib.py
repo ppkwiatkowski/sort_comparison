@@ -3,7 +3,7 @@ import pylab as pl
 import timeit
 
 
-# Timing fuctions
+# Timing fuctions working on lists
 
 def time_algo_min(sort_fun, input_seq, num=10):
     '''
@@ -65,7 +65,29 @@ def time_algo_included_mean(sort_fun, input_seq, num=10):
     return timeit.timeit(wrapped, number=num) / num
 
 
-# Test sequences generators
+# Timing functions working on numpy arrays
+
+def time_algo_np_min(sort_fun, input_seq, num=10):
+    '''
+    Time how long it takes to sort sequence 'input_seq' using
+    function 'sort_fun'. Take min of 'num' times.
+    'input_seq' is a numpy array.
+    '''
+    foo = np.array([], dtype=np.intc)
+
+    def wrapped():
+        global foo
+        sort_fun(foo)
+
+    def reset_seq():
+        global foo
+        foo = input_seq.copy()
+
+    return min(timeit.timeit(wrapped, setup=reset_seq,
+                             number=1) for _ in range(num))
+
+
+# Test sequences generators returning lists
 # Based on: http://warp.povusers.org/SortComparison/
 
 def gen_seq_almost_up(n, percentRand=10):
@@ -88,7 +110,7 @@ def gen_seq_almost_down(n, percentRand=10):
 
 
 def gen_seq_complete_random(n):
-    return np.random.permutation(range(n)).tolist()
+    return np.random.permutation(n).tolist()
 
 
 def gen_seq_random_end(n, nRandom=256):
@@ -96,6 +118,11 @@ def gen_seq_random_end(n, nRandom=256):
     randInts = np.random.choice(result + 1, nRandom, replace=False)
     return list(np.concatenate((result, randInts)))
 
+
+# Test sequences generators returning numpy arrays
+
+def gen_seq_np_permutation(n):
+    return np.random.permutation(n).astype(np.int32)
 
 # Plotting functions
 
@@ -148,3 +175,6 @@ def PlotAlgoTimes(result, algoNames, xValues=[], xLabel="", yLabel="",
     pl.xlabel(xLabel)
     pl.ylabel(yLabel)
     pl.show()
+
+
+

@@ -1,11 +1,5 @@
-from cpython cimport array
-import array
-
-# In-place quicksort
-def quicksort_cython_opt2(list l):
-    cdef array.array a = array.array('i', l)
-    cdef int[:] ca = a
-    _quicksort(a, 0, len(a) - 1)
+def quicksort_cython_opt3(int[:] l):
+    _quicksort(l, 0, l.size - 1)
 
 
 cdef void _quicksort(int[:] l, int start, int stop):
