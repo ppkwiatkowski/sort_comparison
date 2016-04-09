@@ -1,1 +1,1 @@
-void quick_sort (int* a, int n);
+void quicksort (int* a, int n);

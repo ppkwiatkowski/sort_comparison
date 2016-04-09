@@ -1,21 +1,29 @@
 #include <stdio.h>
- 
-void quick_sort (int* a, int n) {
-    int i, j, p, t;
-    if (n < 2)
-        return;
-    p = a[n / 2];
-    for (i = 0, j = n - 1;; i++, j--) {
-        while (a[i] < p)
-            i++;
-        while (p < a[j])
-            j--;
-        if (i >= j)
-            break;
-        t = a[i];
-        a[i] = a[j];
-        a[j] = t;
+
+void _quicksort (int* l, int start, int stop) {
+    int pivot, left, right, tmp;
+    if (stop - start > 0) {
+        pivot = l[start];
+        left = start;
+        right = stop;
+        while (left <= right) {
+            while (l[left] < pivot)
+                left += 1;
+            while (l[right] > pivot)
+                right -= 1;
+            if (left <= right) {
+                tmp = l[left];
+                l[left] = l[right];
+                l[right] = tmp;
+                left += 1;
+                right -= 1;
+            }
+        }
+        _quicksort(l, start, right);
+        _quicksort(l, left, stop);
     }
-    quick_sort(a, i);
-    quick_sort(a + i, n - i);
+}
+
+void quicksort (int* a, int n) {
+    _quicksort(a, 0, n - 1);
 }
