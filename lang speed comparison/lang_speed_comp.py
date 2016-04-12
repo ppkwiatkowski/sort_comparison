@@ -26,17 +26,17 @@ for f in sorting_functions_list:
     foo = gen_seq_permutation(1000)
     f(foo)
     if (is_sorted(foo)):
-        print (f.__name__ + '.. OK')
+        print (f.__name__ + '.. \033[92m OK\033[00m')
     else:
-        print (f.__name__ + '.. FAILED')
+        print (f.__name__ + '.. \033[91m Failed\033[00m')
 
 for f in sorting_functions_np:
     foo = gen_seq_np_permutation(1000)
     f(foo)
     if (is_sorted(foo)):
-        print (f.__name__ + '.. OK')
+        print (f.__name__ + '.. \033[92m OK\033[00m')
     else:
-        print (f.__name__ + '.. FAILED')
+        print (f.__name__ + '.. \033[91m Failed\033[00m')
 
 
 def wrapper(f, l):
