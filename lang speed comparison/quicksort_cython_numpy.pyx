@@ -1,9 +1,11 @@
-def quicksort_cython_numpy(int[:] l):
+from libc.stdint cimport int64_t
+
+def quicksort_cython_numpy(int64_t[:] l):
     _quicksort(l, 0, l.size - 1)
 
 
-cdef void _quicksort(int[:] l, int start, int stop):
-    cdef int pivot, left, right, tmp
+cdef void _quicksort(int64_t[:] l, int64_t start, int64_t stop):
+    cdef int64_t pivot, left, right, tmp
     if stop - start > 0:
         pivot = l[start]
         left = start

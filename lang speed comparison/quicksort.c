@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdint.h>
 
-void _quicksort (int* l, int start, int stop) {
-    int pivot, left, right, tmp;
+void _quicksort (int64_t* l, int64_t start, int64_t stop) {
+    int64_t pivot, left, right, tmp;
     if (stop - start > 0) {
         pivot = l[start];
         left = start;
@@ -24,6 +25,6 @@ void _quicksort (int* l, int start, int stop) {
     }
 }
 
-void quicksort (int* a, int n) {
+void quicksort (int64_t* a, int64_t n) {
     _quicksort(a, 0, n - 1);
 }

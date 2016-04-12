@@ -122,7 +122,7 @@ def gen_seq_random_end(n, nRandom=256):
 # Test sequences generators returning numpy arrays
 
 def gen_seq_np_permutation(n):
-    return np.random.permutation(n).astype(np.int32)
+    return np.random.permutation(n)
 
 # Plotting functions
 

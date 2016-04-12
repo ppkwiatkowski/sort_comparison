@@ -1,1 +1,1 @@
-void quicksort (int* a, int n);
+void quicksort (int64_t* a, int64_t n);
