@@ -109,7 +109,7 @@ def gen_seq_almost_down(n, percentRand=10):
     return result
 
 
-def gen_seq_complete_random(n):
+def gen_seq_permutation(n):
     return np.random.permutation(n).tolist()
 
 
@@ -177,4 +177,7 @@ def PlotAlgoTimes(result, algoNames, xValues=[], xLabel="", yLabel="",
     pl.show()
 
 
+# Other usefull functions
 
+def is_sorted(a):
+        return all(a[i] <= a[i+1] for i in xrange(len(a)-1))

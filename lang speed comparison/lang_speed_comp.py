@@ -8,25 +8,45 @@ from quicksort_c import quicksort_c
 import numpy as np
 
 sys.path.insert(0, '..')
-from sort_comp_lib import (time_algo_min, gen_seq_complete_random,
-                           time_algo_np_min, gen_seq_np_permutation)
+from sort_comp_lib import (time_algo_min, gen_seq_permutation,
+                           time_algo_np_min, gen_seq_np_permutation,
+                           is_sorted)
 
 
-# seq_lengths = [10]
 seq_lengths = [10, 50, 100, 500, 1000, 5000]
-# seq_lengths = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]
+# seq_lengths = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000
 #               1000000, 5000000, 10000000]
+
+# check correctness of sorting functions
+sorting_functions_list = [quicksort_python, quicksort_cython,
+                          quicksort_cython_typed]
+sorting_functions_np = [quicksort_cython_numpy, quicksort_c]
+
+for f in sorting_functions_list:
+    foo = gen_seq_permutation(1000)
+    f(foo)
+    if (is_sorted(foo)):
+        print (f.__name__ + '.. OK')
+    else:
+        print (f.__name__ + '.. FAILED')
+
+for f in sorting_functions_np:
+    foo = gen_seq_np_permutation(1000)
+    f(foo)
+    if (is_sorted(foo)):
+        print (f.__name__ + '.. OK')
+    else:
+        print (f.__name__ + '.. FAILED')
 
 
 def wrapper(f, l):
     print (f.__name__ + ' %d') % l
-    return time_algo_min(f, gen_seq_complete_random(l), 100)
+    return time_algo_min(f, gen_seq_permutation(l), 100)
 
 
 def wrapper_np(f, l):
     print (f.__name__ + ' %d') % l
-    foo = gen_seq_np_permutation(l)
-    return time_algo_np_min(f, foo, 100)
+    return time_algo_np_min(f, gen_seq_np_permutation(l), 100)
 
 d_quicksort_python = [wrapper(quicksort_python, l) for l in seq_lengths]
 # d_quicksort_python_np = [wrapper_np(quicksort_python, l)
