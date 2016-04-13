@@ -121,8 +121,32 @@ def gen_seq_random_end(n, nRandom=256):
 
 # Test sequences generators returning numpy arrays
 
+def gen_seq_np_almost_up(n, percentRand=10):
+    result = np.arange(n)
+    numRand = int((percentRand / 100.0) * n)
+    choices = iter(np.random.choice(range(n), numRand, replace=False))
+    for count in xrange(int(numRand / 2)):
+        i1 = choices.next()
+        i2 = choices.next()
+        result[i1], result[i2] = result[i2], result[i1]
+    return result
+
+
+def gen_seq_np_almost_down(n, percentRand=10):
+    result = gen_seq_np_almost_up(n, percentRand)
+    result = result[::-1]
+    return result
+
+
 def gen_seq_np_permutation(n):
     return np.random.permutation(n)
+
+
+def gen_seq_np_random_end(n, nRandom=256):
+    result = np.array(range(n - nRandom)) * 2
+    randInts = np.random.choice(result + 1, nRandom, replace=False)
+    return np.concatenate((result, randInts))
+
 
 # Plotting functions
 

@@ -7,7 +7,7 @@ import argparse
 import copy
 from sortzilla import (TimeAlgo, seqGenerators, PlotCompBar, PlotAlgoTimes,
                        AlmostUp, RandomEnd, CompleteRandom)
-
+from sorting_algorithms_int64.timsort_c import timsort_c
 
 # Creating a simple command line arguments parser
 parser = argparse.ArgumentParser()
@@ -53,6 +53,16 @@ list.sort(sortingAlgorithmsNames)
 print "  Loaded algorithms: {}".format(', '.join(sortingAlgorithmsNames))
 functions = map(__import__, sortingAlgorithmsNames)
 
+
+class timsort:
+    @staticmethod
+    def sort(l):
+        foo = np.array(l)
+        timsort_c(foo)
+
+
+functions.append(timsort)
+sortingAlgorithmsNames.append('timsort_c')
 
 # Checking if algorithms sort correctly
 if args.correctness:  # Run with -c
