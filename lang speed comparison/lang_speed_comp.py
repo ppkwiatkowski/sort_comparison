@@ -14,10 +14,11 @@ from sort_comp_lib import (time_algo_min, gen_seq_permutation,
 
 
 seq_lengths = [10, 50, 100, 500, 1000, 5000]
-# seq_lengths = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000
+# seq_lengths = [10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000, 500000]
 #               1000000, 5000000, 10000000]
 
 # check correctness of sorting functions
+
 sorting_functions_list = [quicksort_python, quicksort_cython,
                           quicksort_cython_typed]
 sorting_functions_np = [quicksort_cython_numpy, quicksort_c]
@@ -57,7 +58,7 @@ d_quicksort_cython_typed = [wrapper(quicksort_cython_typed, l)
                             for l in seq_lengths]
 d_quicksort_cython_numpy = [wrapper_np(quicksort_cython_numpy, l)
                             for l in seq_lengths]
-d_np_sort = [wrapper_np(np.sort, l) for l in seq_lengths]
+d_np_sort = [wrapper_np(np.ndarray.sort, l) for l in seq_lengths]
 d_quicksort_c = [wrapper_np(quicksort_c, l) for l in seq_lengths]
 
 plt.plot(seq_lengths, d_quicksort_python,
@@ -72,7 +73,7 @@ plt.plot(seq_lengths, d_quicksort_cython_typed,
          '--', marker='x', label='quicksort_cython_typed')
 plt.plot(seq_lengths, d_quicksort_cython_numpy,
          '--', marker='x', label='quicksort_cython_numpy')
-plt.plot(seq_lengths, d_np_sort, '--', marker='x', label='np.sort')
+plt.plot(seq_lengths, d_np_sort, '--', marker='x', label='np.ndarray.sort')
 plt.plot(seq_lengths, d_quicksort_c, '--', marker='x', label='quicksort_c')
 
 plt.grid(True)
