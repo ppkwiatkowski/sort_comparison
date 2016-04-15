@@ -1,5 +1,5 @@
 import numpy as np
-import pylab as pl
+import matplotlib.pyplot as plt
 import timeit
 
 
@@ -134,7 +134,7 @@ def gen_seq_np_almost_up(n, percentRand=10):
 
 def gen_seq_np_almost_down(n, percentRand=10):
     result = gen_seq_np_almost_up(n, percentRand)
-    result = result[::-1]
+    result = result[::-1].copy()
     return result
 
 
@@ -150,33 +150,26 @@ def gen_seq_np_random_end(n, nRandom=256):
 
 # Plotting functions
 
-def PlotCompBar(result, algoNames, seqNames, plotTitle='', spacer=1.5,
-                barWidth=0.25, loc=2):
-    n_groups = len(result[0])
-    index = np.arange(n_groups)*spacer+0.2
-    opacity = 0.4
-    error_config = {'ecolor': '0.3'}
-
-    pl.hold('on')
-
-    bariter = iter(xrange(10))
-    labeliter = iter(seqNames)
+def plot_bars(result, algo_names, seq_names, title='', spacer=1.5,
+              bar_width=0.25):
+    n = len(result[0])
+    ind = np.arange(n) * spacer + spacer/2  # the x locations for the groups
     coloriter = iter(['r', 'g', 'b', 'm', 'y'])
+    labeliter = iter(seq_names)
 
-    for res in result:
-        rects1 = pl.bar(index + barWidth * bariter.next(), res,
-                        barWidth, alpha=opacity, color=coloriter.next(),
-                        label=labeliter.next())
+    fig, ax = plt.subplots()
+    for i, r in enumerate(result):
+        ax.bar(ind + bar_width * i, r, bar_width, color=coloriter.next(),
+               label=labeliter.next(), zorder=3)
 
-    pl.xticks(rotation=45)
-    pl.xlabel('Algorithm')
-    pl.ylabel('Time(s)')
-    pl.title(plotTitle)
-    pl.xticks(index + barWidth, algoNames)
-    pl.legend(loc=loc)
-    pl.plot(0, 0, 'w.')
-    pl.tight_layout()
-    pl.show()
+    plt.xticks(rotation=45)
+    plt.ylabel('Time(s)')
+    plt.title(title)
+    plt.xticks(ind + len(result)/2 * bar_width, algo_names)
+    plt.grid(True, zorder=0)
+    plt.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0., frameon=False)
+    fig.subplots_adjust(right=0.76, bottom=0.15)
+    plt.show()
 
 
 def PlotAlgoTimes(result, algoNames, xValues=[], xLabel="", yLabel="",
