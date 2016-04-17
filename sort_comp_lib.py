@@ -162,39 +162,40 @@ def plot_bars(result, algo_names, seq_names, title='', spacer=1.5,
         ax.bar(ind + bar_width * i, r, bar_width, color=coloriter.next(),
                label=labeliter.next(), zorder=3)
 
-    plt.xticks(rotation=45)
-    plt.ylabel('Time(s)')
     plt.title(title)
     plt.xticks(ind + len(result)/2 * bar_width, algo_names)
+    plt.xticks(rotation=45)
+    plt.ylabel('Time (s)')
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
     plt.grid(True, zorder=0)
     plt.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0., frameon=False)
     fig.subplots_adjust(right=0.76, bottom=0.15)
     plt.show()
 
 
-def PlotAlgoTimes(result, algoNames, xValues=[], xLabel="", yLabel="",
-                  plotTitle="", newFig=True, loc=2):
-
-    if newFig:
-        pl.figure()
-
-    pl.hold('on')
-    if xValues == []:
-        xValues = range(len(result))
+def plot_linear(result, algo_names, xs=[], xlabel="", ylabel="", title=""):
+    if xs == []:
+        xs = range(len(result))
     labeliter = iter(['r-', 'g-', 'b-', 'c-', 'm-', 'y-', 'k-',
                       'r--', 'g--', 'b--', 'c--', 'm--', 'y--', 'k--',
                       'r:', 'g:', 'b:', 'c:', 'm:', 'y:', 'k:'])
+    fig, ax = plt.subplots()
     for res in result:
-        pl.plot(xValues, res, labeliter.next())
-    pl.legend(algoNames, loc=loc)
-    pl.axis('tight')
-    pl.title(plotTitle)
-    pl.xlabel(xLabel)
-    pl.ylabel(yLabel)
-    pl.show()
+        plt.plot(xs, res, labeliter.next(), zorder=3)
+
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+    plt.grid(True, zorder=0)
+    plt.legend(algo_names, bbox_to_anchor=(1, 1), loc=2, borderaxespad=0.,
+               frameon=False)
+    fig.subplots_adjust(right=0.76, bottom=0.12)
+    plt.axis('tight')
+    plt.show()
 
 
-# Other usefull functions
+# Other useful functions
 
 def is_sorted(a):
         return all(a[i] <= a[i+1] for i in xrange(len(a)-1))

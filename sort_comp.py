@@ -1,8 +1,9 @@
 import argparse
 import numpy as np
+import pylab as pl
 from sort_comp_lib import (is_sorted, gen_seq_np_almost_up, gen_seq_np_almost_down,
                            gen_seq_np_random_end, gen_seq_np_permutation,
-                           time_algo_np_min, plot_bars)
+                           time_algo_np_min, plot_bars, plot_linear)
 from sorting_algorithms_int64.cy_swenson_sort import (tim_sort, shell_sort,
     binary_insertion_sort, heap_sort, quick_sort, merge_sort, selection_sort)
 
@@ -19,7 +20,7 @@ args = parser.parse_args()
 def fnames(flist):
     return [tmp.__name__ for tmp in flist]
 
-N = 1000000
+N = 1000
 sorting_algorithms_funcions = [np.ndarray.sort, tim_sort, shell_sort,
                                heap_sort, quick_sort, merge_sort]
 sorting_algorithms_names = fnames(sorting_algorithms_funcions)
@@ -53,3 +54,16 @@ if args.basic:  # Run with -b
     # pl.axis([0,4.5,0,0.4])
     plot_bars(result, sorting_algorithms_names,
               seq_gen_names, 'Test sequences length: ' + '{:,}'.format(N))
+
+# Studying the effect of increasing randomization
+if args.randomization:  # Run with -r
+    print "  Testing effect of different levels of randomization.."
+    randpers = pl.linspace(1, 60, 25)
+    print "  Generating test sequences.."
+    seqs = [gen_seq_np_almost_up(N, tmp) for tmp in randpers]
+    print "  Testing algorithms.."
+    result = [[time_algo_np_min(f, seq)
+              for seq in seqs] for f in sorting_algorithms_funcions]
+    print "  Plotting results.."
+    plot_linear(result, sorting_algorithms_names, xs=randpers,
+               xlabel="Percent randomization", ylabel="Time (s)")
