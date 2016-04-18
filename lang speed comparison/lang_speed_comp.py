@@ -18,7 +18,6 @@ seq_lengths = [10, 50, 100, 500, 1000, 5000]
 #               1000000, 5000000, 10000000]
 
 # check correctness of sorting functions
-
 sorting_functions_list = [quicksort_python, quicksort_cython,
                           quicksort_cython_typed]
 sorting_functions_np = [quicksort_cython_numpy, quicksort_c]
