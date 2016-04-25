@@ -21,3 +21,9 @@ def merge_sort(int64_t[::1] a):
 
 def selection_sort(int64_t[::1] a):
     swenson_sort.selection_sort(&a[0], a.size)
+
+def grail_sort(int64_t[::1] a):
+    swenson_sort.grail_sort(&a[0], a.size)
+
+def sqrt_sort(int64_t[::1] a):
+    swenson_sort.sqrt_sort(&a[0], a.size)

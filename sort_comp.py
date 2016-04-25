@@ -9,9 +9,12 @@ from sort_comp_lib import (is_sorted, gen_seq_np_almost_up,
 from sorting_algorithms_int64.cy_swenson_sort import (tim_sort, shell_sort,
                                                       binary_insertion_sort,
                                                       heap_sort, quick_sort,
-                                                      merge_sort,
-                                                      selection_sort)
-
+                                                      merge_sort, grail_sort,
+                                                      selection_sort,
+                                                      sqrt_sort)
+from sorting_algorithms_int64.cy_introsort import intro_sort
+# from sorting_algorithms_int64.cy_cubesort import cube_sort
+from sorting_algorithms_int64.cy_smoothsort import smooth_sort
 
 # Creating a simple command line arguments parser
 parser = argparse.ArgumentParser()
@@ -38,7 +41,8 @@ def fnames(flist):
 
 N = args.N
 sorting_algorithms_funcions = [np.ndarray.sort, tim_sort, shell_sort,
-                               heap_sort, quick_sort, merge_sort]
+                               heap_sort, quick_sort, merge_sort, intro_sort,
+                               smooth_sort, grail_sort, sqrt_sort]
 sorting_algorithms_names = fnames(sorting_algorithms_funcions)
 seq_generators = [gen_seq_np_permutation, gen_seq_np_almost_up,
                   gen_seq_np_almost_down, gen_seq_np_random_end]
@@ -58,7 +62,7 @@ if args.correctness:  # Run with -c
                 + ".. \033[91m Failed\033[00m"
 
 # Bar plot comparison
-if args.basic:  # Run with -b
+if args.bar:  # Run with -b
     print "  Testing different types of sequences vs different types of " \
         "sorting algorithms.."
     print "  Generating test sequences.. "
@@ -85,7 +89,7 @@ if args.randomization:  # Run with -r
                 xlabel="Percent randomization", ylabel="Time (s)")
 
 # Studying the effect of increasing sequence length
-if args.length:  # Run with -l
+if args.length:  # Run with -l <seq_name>
     print "  Testing " + args.length + " sequences of different lengths..."
     testlens = pl.linspace(1000, N, 10)
     print "  Generating test sequences.."

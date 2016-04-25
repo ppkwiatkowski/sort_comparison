@@ -30,3 +30,11 @@ void merge_sort (int64_t* a, int64_t n){
 void selection_sort (int64_t* a, int64_t n){
 	sorter_selection_sort(a, n);
 }
+
+void grail_sort (int64_t* a, int64_t n){
+	sorter_grail_sort(a, n);
+}
+
+void sqrt_sort (int64_t* a, int64_t n){
+	sorter_sqrt_sort(a, n);
+}

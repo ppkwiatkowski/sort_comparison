@@ -11,3 +11,7 @@ void quick_sort(int64_t* a, int64_t n);
 void merge_sort (int64_t* a, int64_t n);
 
 void selection_sort (int64_t* a, int64_t n);
+
+void grail_sort (int64_t* a, int64_t n);
+
+void sqrt_sort (int64_t* a, int64_t n);
