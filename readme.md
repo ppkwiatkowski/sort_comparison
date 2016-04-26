@@ -1,5 +1,4 @@
 ##Sort comparison##
-_________
 ####Overview####
 
 `sort_comp.py` is a script written for testing modern sorting algorithms on different input sequence types. Sorting algorithms are written in `c` for efficiency, and wrapped with `cython` to become accesible from `python` level for convenience. 
@@ -16,7 +15,17 @@ Sorted items are 64-bit integers.
 
 Following results come from tests performed on 2011 MacBook Pro with 2,3 GHz Intel Core i5:
 
-...
+######Bar plot comparison######
+<img src="https://github.com/ppkwiatkowski/sort_comparison/blob/master/results/b_1kk.png">
+
+######Increasing test sequence length######
+<img src="https://github.com/ppkwiatkowski/sort_comparison/blob/master/results/l_permutation_1kk.png">
+<img src="https://github.com/ppkwiatkowski/sort_comparison/blob/master/results/l_almost_up_1kk.png">
+<img src="https://github.com/ppkwiatkowski/sort_comparison/blob/master/results/l_almost_down_1kk.png">
+<img src="https://github.com/ppkwiatkowski/sort_comparison/blob/master/results/l_random_end_1kk.png">
+
+######Increasing randomization######
+<img src="https://github.com/ppkwiatkowski/sort_comparison/blob/master/results/r_1kk.png">
 
 ####How to run####
 Scripts require `python 2.7` with installed `cython`, `numpy` and `matplotlib`.
@@ -36,7 +45,6 @@ Plots algorithm speed vs. percantage of items that are not in order in the input
     python sort_comp.py -r [N=10000]
   
 ##Laguage speed comparison##
-_________
 This is a simple test designed to compare the speed of python, cython and pure c code.
 I am comparing the execution times of simple quicksort procedure, on sequences of different lengths.
 Ale the files are in the `lang speed comparison\` folder. To run execute the following commands:
