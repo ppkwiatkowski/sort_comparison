@@ -68,6 +68,14 @@ Below are the results from the test performed on 2011 MacBook Pro with 2,3 GHz I
 **np.sort** - default numpy method of sorting arrays<br/>
 **quicksort_c** - pure c code wrapped with cython<br/>
 
+Those are the results from IPython's `%timeit` function:
+```
+In [8]: %timeit quicksort_python(np.random.permutation(10000))
+10 loops, best of 3: 74.1 ms per loop
+
+In [9]: %timeit quicksort_c(np.random.permutation(10000))
+100 loops, best of 3: 2.33 ms per loop
+```
 ##References##
 _________
 - [1] http://warp.povusers.org/SortComparison/
