@@ -32,8 +32,10 @@ Scripts require `python 2.7` with installed `cython`, `numpy` and `matplotlib`.
 
 Compilation of sorting algorithms in `c`:
 
-    python sorting_algorithms_int64/setup.py build_ext --inplace
-
+    cd sorting_algorithms_int64/
+    python setup.py build_ext --inplace
+    cd ..
+    
 Plots a bar chart of algorithms speed on different input sequences: 
 
     python sort_comp.py -b [N=10000]
