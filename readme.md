@@ -42,7 +42,7 @@ Plots a bar chart of algorithms speed on different input sequences:
 Linear plot of algorithm speed vs. sequence length for specific input sequence type:
 
     python sort_comp.py -l {permutation, almost_up, almost_down, random_end} [N=10000]
-Plots algorithm speed vs. percantage of items that are not in order in the input sequence:
+Plots algorithm speed vs. percantage of the items that are not in order:
 
     python sort_comp.py -r [N=10000]
   
@@ -77,7 +77,6 @@ In [9]: %timeit quicksort_c(np.random.permutation(10000))
 100 loops, best of 3: 2.33 ms per loop
 ```
 ##References##
-_________
 - [1] http://warp.povusers.org/SortComparison/
 - [2] https://github.com/swenson/sort
 - [3] https://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Smoothsort
