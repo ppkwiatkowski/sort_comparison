@@ -153,7 +153,7 @@ def gen_seq_np_random_end(n, nRandom=256):
 def plot_bars(result, algo_names, seq_names, title='', spacer=1.5,
               bar_width=0.25):
     n = len(result[0])
-    ind = np.arange(n) * spacer + spacer/2  # the x locations for the groups
+    ind = np.arange(n) * spacer + spacer / 3  # the x locations for the groups
     coloriter = iter(['r', 'g', 'b', 'm', 'y'])
     labeliter = iter(seq_names)
 
@@ -163,17 +163,18 @@ def plot_bars(result, algo_names, seq_names, title='', spacer=1.5,
                label=labeliter.next(), zorder=3)
 
     plt.title(title)
-    plt.xticks(ind + len(result)/2 * bar_width, algo_names)
+    plt.xticks(ind + len(result) / 2 * bar_width, algo_names)
     plt.xticks(rotation=45)
     plt.ylabel('Time (s)')
     plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-    plt.grid(True, zorder=0)
+    ax.yaxis.grid(True, zorder=0)
     plt.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0., frameon=False)
     fig.subplots_adjust(right=0.76, bottom=0.15)
     plt.show()
 
 
-def plot_linear(result, algo_names, xs=[], xlabel="", ylabel="", title=""):
+def plot_linear(result, algo_names, xs=[], xlabel="", ylabel="", title="",
+                scix=False, sciy=False):
     if xs == []:
         xs = range(len(result))
     labeliter = iter(['r-', 'g-', 'b-', 'c-', 'm-', 'y-', 'k-',
@@ -186,7 +187,10 @@ def plot_linear(result, algo_names, xs=[], xlabel="", ylabel="", title=""):
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+    if scix:
+        plt.ticklabel_format(style='sci', axis='x', scilimits=(0, 0))
+    if sciy:
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
     plt.grid(True, zorder=0)
     plt.legend(algo_names, bbox_to_anchor=(1, 1), loc=2, borderaxespad=0.,
                frameon=False)
@@ -198,4 +202,4 @@ def plot_linear(result, algo_names, xs=[], xlabel="", ylabel="", title=""):
 # Other useful functions
 
 def is_sorted(a):
-        return all(a[i] <= a[i+1] for i in xrange(len(a)-1))
+        return all(a[i] <= a[i + 1] for i in xrange(len(a) - 1))

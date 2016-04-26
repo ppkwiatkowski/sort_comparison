@@ -40,9 +40,12 @@ def fnames(flist):
     return [tmp.__name__ for tmp in flist]
 
 N = args.N
-sorting_algorithms_funcions = [np.ndarray.sort, tim_sort, shell_sort,
-                               heap_sort, quick_sort, merge_sort, intro_sort,
-                               smooth_sort, grail_sort, sqrt_sort]
+sorting_algorithms_funcions = [
+    # np.ndarray.sort,
+    tim_sort, shell_sort,
+    heap_sort, quick_sort, merge_sort, intro_sort,
+    smooth_sort, grail_sort, sqrt_sort
+]
 sorting_algorithms_names = fnames(sorting_algorithms_funcions)
 seq_generators = [gen_seq_np_permutation, gen_seq_np_almost_up,
                   gen_seq_np_almost_down, gen_seq_np_random_end]
@@ -86,7 +89,8 @@ if args.randomization:  # Run with -r
               for seq in seqs] for f in sorting_algorithms_funcions]
     print "  Plotting results.."
     plot_linear(result, sorting_algorithms_names, xs=randpers,
-                xlabel="Percent randomization", ylabel="Time (s)")
+                xlabel="Randomization percent", ylabel="Time (s)",
+                title='Test sequences length: ' + '{:,}'.format(N))
 
 # Studying the effect of increasing sequence length
 if args.length:  # Run with -l <seq_name>
@@ -103,4 +107,5 @@ if args.length:  # Run with -l <seq_name>
               for seq in seqs] for f in sorting_algorithms_funcions]
     print "  Plotting results.."
     plot_linear(result, sorting_algorithms_names, xs=testlens,
-                xlabel="Sequence Length", ylabel="Time (s)", title=args.length)
+                xlabel="Sequence Length", ylabel="Time (s)", title=args.length,
+                scix=True)
