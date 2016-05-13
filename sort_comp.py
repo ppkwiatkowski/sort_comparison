@@ -3,6 +3,7 @@ import numpy as np
 import pylab as pl
 import sys
 from sort_comp_lib import (is_sorted, gen_seq_np_almost_up,
+                           gen_seq_np_completely_random, gen_seq_np_duplicates,
                            gen_seq_np_almost_down, gen_seq_np_random_end,
                            gen_seq_np_permutation, time_algo_np_min, plot_bars,
                            plot_linear)
@@ -47,9 +48,18 @@ sorting_algorithms_funcions = [
     smooth_sort, grail_sort, sqrt_sort
 ]
 sorting_algorithms_names = fnames(sorting_algorithms_funcions)
-seq_generators = [gen_seq_np_permutation, gen_seq_np_almost_up,
-                  gen_seq_np_almost_down, gen_seq_np_random_end]
-seq_gen_names = ['permutation', 'almost_up', 'almost_down', 'random_end']
+seq_generators = [gen_seq_np_completely_random,
+                  gen_seq_np_permutation,
+                  gen_seq_np_duplicates,
+                  gen_seq_np_almost_up,
+                  gen_seq_np_almost_down,
+                  gen_seq_np_random_end]
+seq_gen_names = ['completely random',
+                 'permutation',
+                 'duplicates',
+                 'almost up',
+                 'almost down',
+                 'random end']
 
 # Checking if algorithms sort correctly
 if args.correctness:  # Run with -c

@@ -148,13 +148,38 @@ def gen_seq_np_random_end(n, nRandom=256):
     return np.concatenate((result, randInts))
 
 
+def gen_seq_np_completely_random(n):
+    type_info = np.iinfo(np.int64)
+    return np.random.random_integers(type_info.min, type_info.max, n)
+
+
+def gen_seq_np_duplicates(n, uniques=10):
+    type_info = np.iinfo(np.int64)
+    unique_values = np.random.random_integers(type_info.min, type_info.max,
+                                              uniques)
+    return np.random.choice(unique_values, n)
+
+
 # Plotting functions
 
-def plot_bars(result, algo_names, seq_names, title='', spacer=1.5,
+def plot_bars(result, algo_names, seq_names, title='', spacer=2,
               bar_width=0.25):
     n = len(result[0])
-    ind = np.arange(n) * spacer + spacer / 3  # the x locations for the groups
-    coloriter = iter(['r', 'g', 'b', 'm', 'y'])
+    group_len = float(len(seq_names))
+    spacer_val = (group_len + spacer) * bar_width
+    # ind = the x locations for the groups
+    ind = np.arange(n) * spacer_val + (spacer_val - group_len / 2 * bar_width)
+    coloriter = iter([
+        '#DECF3F',  # yellow
+        '#5DA5DA',  # blue
+        '#FAA43A',  # orange
+        '#60BD68',  # green
+        '#F15854',  # red
+        '#B276B2',  # purple
+        '#F17CB0',  # pink
+        '#B2912F',  # brown
+        '#4D4D4D',  # gray
+    ])
     labeliter = iter(seq_names)
 
     fig, ax = plt.subplots()
@@ -162,8 +187,10 @@ def plot_bars(result, algo_names, seq_names, title='', spacer=1.5,
         ax.bar(ind + bar_width * i, r, bar_width, color=coloriter.next(),
                label=labeliter.next(), zorder=3)
 
+    plt.xlim([min(ind) - spacer * bar_width,
+              max(ind) + (group_len + spacer) * bar_width])
     plt.title(title)
-    plt.xticks(ind + len(result) / 2 * bar_width, algo_names)
+    plt.xticks(ind + group_len / 2 * bar_width, algo_names)
     plt.xticks(rotation=45)
     plt.ylabel('Time (s)')
     plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
