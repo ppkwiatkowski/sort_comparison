@@ -2,11 +2,11 @@ import argparse
 import numpy as np
 import pylab as pl
 import sys
-from sort_comp_lib import (is_sorted, gen_seq_np_almost_up,
+from sort_comp_lib import (is_sorted, gen_seq_np_almost_up, time_algo,
                            gen_seq_np_completely_random, gen_seq_np_duplicates,
                            gen_seq_np_almost_down, gen_seq_np_random_end,
-                           gen_seq_np_permutation, time_algo_np_min, plot_bars,
-                           plot_linear)
+                           gen_seq_np_permutation, time_algo_np_min,
+                           plot_bars, plot_bars_e, plot_linear)
 from sorting_algorithms_int64.cy_swenson_sort import (tim_sort, shell_sort,
                                                       binary_insertion_sort,
                                                       heap_sort, quick_sort,
@@ -25,6 +25,9 @@ parser.add_argument('-c', '--correctness', action='store_true',
                     help='check if algos correctly sort N elem permutation')
 parser.add_argument('-b', '--bar', action='store_true',
                     help='bar plot of different algos on different seqs')
+parser.add_argument('-be', '--bare', action='store_true',
+                    help='bar plot with errorbars of different algos on \
+                    different seqs')
 parser.add_argument('-r', '--randomization', action='store_true',
                     help='behavior on almost_up seqs with different random %%')
 parser.add_argument('-l', '--length', choices=['almost_up', 'almost_down',
@@ -64,7 +67,7 @@ seq_gen_names = ['completely random',
 # Checking if algorithms sort correctly
 if args.correctness:  # Run with -c
     print "  Checking correctness.. "
-    testseq = gen_seq_np_permutation(N)
+    testseq = gen_seq_np_completely_random(N)
     for f in sorting_algorithms_funcions:
         testseqcopy = np.copy(testseq)
         f(testseqcopy)
@@ -86,6 +89,17 @@ if args.bar:  # Run with -b
     print "  Plotting results.."
     # pl.axis([0,4.5,0,0.4])
     plot_bars(result, sorting_algorithms_names,
+              seq_gen_names, 'Test sequences length: ' + '{:,}'.format(N))
+
+# Bar plot comparison with errorbars
+if args.bare:  # Run with -be
+    print "  Testing different types of sequences vs different types of " \
+        "sorting algorithms.."
+    print "  Testing algorithms.."
+    result = [[time_algo(f, seqgen, N)
+               for f in sorting_algorithms_funcions] for seqgen in seq_generators]
+    print "  Plotting results.."
+    plot_bars_e(result, sorting_algorithms_names,
               seq_gen_names, 'Test sequences length: ' + '{:,}'.format(N))
 
 # Studying the effect of increasing randomization

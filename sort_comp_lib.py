@@ -87,6 +87,15 @@ def time_algo_np_min(sort_fun, input_seq, num=10):
                              number=1) for _ in range(num))
 
 
+def time_algo(sort_fun, input_seq_generator, N, num = 10):
+    print "        Testing " + sort_fun.__name__ + " on " \
+          + input_seq_generator.__name__
+    results = []
+    for i in xrange(num):
+        input_seq = input_seq_generator(N)
+        results.append(time_algo_np_min(sort_fun, input_seq))
+    return (sum(results)/len(results), min(results), max(results))
+
 # Test sequences generators returning lists
 # Based on: http://warp.povusers.org/SortComparison/
 
@@ -195,7 +204,50 @@ def plot_bars(result, algo_names, seq_names, title='', spacer=2,
     plt.ylabel('Time (s)')
     plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
     ax.yaxis.grid(True, zorder=0)
-    plt.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0., frameon=False)
+    plt.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0.5, frameon=False)
+    fig.subplots_adjust(right=0.76, bottom=0.15)
+    plt.show()
+
+
+def plot_bars_e(result, algo_names, seq_names, title='', spacer=2,
+              bar_width=0.25):
+    n = len(result[0])
+    group_len = float(len(seq_names))
+    spacer_val = (group_len + spacer) * bar_width
+    # ind = the x locations for the groups
+    ind = np.arange(n) * spacer_val + (spacer_val - group_len / 2 * bar_width)
+    coloriter = iter([
+        '#DECF3F',  # yellow
+        '#5DA5DA',  # blue
+        '#FAA43A',  # orange
+        '#60BD68',  # green
+        '#F15854',  # red
+        '#B276B2',  # purple
+        '#F17CB0',  # pink
+        '#B2912F',  # brown
+        '#4D4D4D',  # gray
+    ])
+    labeliter = iter(seq_names)
+
+    fig, ax = plt.subplots()
+    for i, r in enumerate(result):
+        barh = [x[0] for x in r]
+        min_e = [x[0] - x[1] for x in r]
+        max_e = [x[2] - x[0] for x in r]
+        ax.bar(ind + bar_width * i, barh, bar_width, color=coloriter.next(),
+               label=labeliter.next(), zorder=3)
+        ax.errorbar(ind + bar_width * i + bar_width/2, barh, fmt='none',
+                    yerr=[min_e, max_e], ecolor='#4D4D4D', zorder=4)
+
+    plt.xlim([min(ind) - spacer * bar_width,
+              max(ind) + (group_len + spacer) * bar_width])
+    plt.title(title)
+    plt.xticks(ind + group_len / 2 * bar_width, algo_names)
+    plt.xticks(rotation=45)
+    plt.ylabel('Time (s)')
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+    ax.yaxis.grid(True, zorder=0)
+    plt.legend(bbox_to_anchor=(1, 1), loc=2, borderaxespad=0.5, frameon=False)
     fig.subplots_adjust(right=0.76, bottom=0.15)
     plt.show()
 
