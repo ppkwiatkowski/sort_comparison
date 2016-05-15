@@ -26,8 +26,8 @@ parser.add_argument('-c', '--correctness', action='store_true',
 parser.add_argument('-b', '--bar', action='store_true',
                     help='bar plot of different algos on different seqs')
 parser.add_argument('-be', '--bare', action='store_true',
-                    help='bar plot with errorbars of different algos on \
-                    different seqs')
+                    help='bar plot with errorbars of different algos on'
+                    ' different seqs')
 parser.add_argument('-r', '--randomization', action='store_true',
                     help='behavior on almost_up seqs with different random %%')
 parser.add_argument('-l', '--length', choices=['almost_up', 'almost_down',
@@ -97,10 +97,11 @@ if args.bare:  # Run with -be
         "sorting algorithms.."
     print "  Testing algorithms.."
     result = [[time_algo(f, seqgen, N)
-               for f in sorting_algorithms_funcions] for seqgen in seq_generators]
+               for f in sorting_algorithms_funcions]
+              for seqgen in seq_generators]
     print "  Plotting results.."
     plot_bars_e(result, sorting_algorithms_names,
-              seq_gen_names, 'Test sequences length: ' + '{:,}'.format(N))
+                seq_gen_names, 'Test sequences length: ' + '{:,}'.format(N))
 
 # Studying the effect of increasing randomization
 if args.randomization:  # Run with -r
